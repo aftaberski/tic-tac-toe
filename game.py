@@ -20,9 +20,14 @@ class Game(object):
         self.whos_next = player1
 
     def move(self, x, y):
-        self.board.game_board[int(x)][int(y)] = self.whos_next.mark
-        self.switch_players()
-        self.board.print_board()
+        if int(x) < 0 or int(x) >2 or int(y) < 0 or int(y) > 2:
+            print "You need to pick numbers that are between 0 and 2"
+        elif self.board.game_board[int(x)][int(y)] == self.player1.mark or self.board.game_board[int(x)][int(y)] == self.player2.mark:
+            print "Someone already went there! Pick another spot"
+        else:
+            self.board.game_board[int(x)][int(y)] = self.whos_next.mark
+            self.switch_players()
+            self.board.print_board()
 
     def switch_players(self):
         if self.whos_next == player1:
@@ -38,25 +43,33 @@ class Game(object):
         return False
 
     def is_not_winner(self):
-        return not self.check_horizontal() and not self.check_vertical() and not self.check_left_to_right_diagonal()
+        return not self.check_horizontal() and not self.check_vertical() and not self.check_left_to_right_diagonal() and not self.check_right_to_left_diagonal()
 
     def check_horizontal(self):
         for row in range(3):
             if len(set(self.board.game_board[row])) == 1 and self.board.game_board[row][0] is not "":
+                print "check horizontal passed"
                 return True
         return False
 
     def check_vertical(self):
         for column in range(3):
             if len(set([row[column] for row in self.board.game_board])) == 1 and self.board.game_board[0][column] is not "":
+                print "check vertical passed"
                 return True
         return False
 
     def check_left_to_right_diagonal(self):
         if len(set([self.board.game_board[num][num] for num in range(3)])) == 1 and self.board.game_board[0][0] is not "":
+            print "l to r passed"
             return True
         return False
 
+    def check_right_to_left_diagonal(self):
+        if len(set([list(reversed(self.board.game_board[num]))[num] for num in range(3)])) == 1 and list(reversed(self.board.game_board[0]))[0] is not "":
+            print "r to l passed"
+            return True
+        return False
     # TODO: Add check right to left diagonal
 
     def play(self):
