@@ -70,8 +70,8 @@ class Game(object):
     def play(self):
         while not self.is_finished() and not self.is_winner():
             try:
-                x = int(raw_input(self.whos_next.name + ", enter your x coordinate:"))
-                y = int(raw_input(self.whos_next.name + ", enter your y coordinate:"))
+                x = int(raw_input(self.whos_next.name + ", enter the row number (0-2 from top to bottom): "))
+                y = int(raw_input(self.whos_next.name + ", enter the column number (0-2 from left to right): "))
                 self.move(x, y)
             except ValueError:
                 print "You must enter valid numbers"
