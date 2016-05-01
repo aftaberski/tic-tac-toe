@@ -90,9 +90,9 @@ if __name__ == '__main__':
     print "*" * 50
     name1 =raw_input("Player 1: Please enter your name:")
     player1 = Player(name1, "X")
-    name2 = raw_input("Player2: Please enter your name:")
+    name2 = raw_input("Player 2: Please enter your name:")
     player2 = Player(name2, "O")
-    print "Thanks for playing " + player1.name + " and " + player2.name
+    print "Thanks for playing " + player1.name + " and " + player2.name + "!"
     game = Game(player1, player2)
     game.board.print_board()
 
