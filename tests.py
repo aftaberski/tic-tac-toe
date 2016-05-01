@@ -1,7 +1,6 @@
 from unittest import TestCase, main
 from game import Board, Player, Game
 
-
 class TestGame(TestCase):
     def setUp(self):
         self.board = Board()
@@ -28,50 +27,16 @@ class TestGame(TestCase):
                                     ["", "X", "X"]]
         self.assertEqual(False, self.game.is_not_winner())
 
-    def game_is_over(self):
+    def test_split(self):
         self.game.board.game_board = [["X", "O", ""],
-                                    ["O", "X", ""],
-                                    ["", "", "X"]]
+                                      ["O", "X", ""],
+                                      ["", "O", ""]]
         self.assertEqual(True, self.game.is_not_finished())
-        # self.board.board = [[HUMAN, EMPTY, COMPUTER],
-        #                     [HUMAN, HUMAN, HUMAN],
-        #                     [COMPUTER, COMPUTER, EMPTY]]
-        # self.assertEqual(HUMAN, self.board.get_winner())
 
-        # self.board.board = [[COMPUTER, HUMAN, COMPUTER],
-        #                     [COMPUTER, HUMAN, COMPUTER],
-        #                     [HUMAN, COMPUTER, HUMAN]]
-        # self.assertEqual(EMPTY, self.board.get_winner())
-
-        # self.board.board = [[EMPTY, HUMAN, COMPUTER],
-        #                     [COMPUTER, HUMAN, COMPUTER],
-        #                     [EMPTY, COMPUTER, HUMAN]]
-        # self.assertEqual(None, self.board.get_winner())
-
-        # self.board.board = [[EMPTY, HUMAN, COMPUTER],
-        #                     [HUMAN, COMPUTER, HUMAN],
-        #                     [COMPUTER, COMPUTER, HUMAN]]
-        # self.assertEqual(COMPUTER, self.board.get_winner())
-
-        # self.board.board = [[EMPTY, HUMAN, HUMAN],
-        #                     [HUMAN, COMPUTER, HUMAN],
-        #                     [COMPUTER, COMPUTER, COMPUTER]]
-        # self.assertEqual(COMPUTER, self.board.get_winner())
-
-        # self.board.board = [[EMPTY, HUMAN, HUMAN],
-        #                     [HUMAN, COMPUTER, HUMAN],
-        #                     [COMPUTER, COMPUTER, COMPUTER]]
-        # self.assertEqual(COMPUTER, self.board.get_winner())
-
-        # self.board.board = [[HUMAN, COMPUTER, HUMAN],
-        #                     [HUMAN, COMPUTER, HUMAN],
-        #                     [HUMAN, HUMAN, COMPUTER]]
-        # self.assertEqual(HUMAN, self.board.get_winner())
-
-        # self.board.board = [[HUMAN, COMPUTER, HUMAN],
-        #                     [COMPUTER, COMPUTER, HUMAN],
-        #                     [HUMAN, EMPTY, HUMAN]]
-        # self.assertEqual(HUMAN, self.board.get_winner())
+        self.game.board.game_board = [["X", "O", "O"],
+                                      ["O", "X", "X"],
+                                      ["O", "O", "O"]]
+        self.assertEqual(False, self.game.is_not_finished())
 
 if __name__ == '__main__':
     main()
