@@ -35,15 +35,15 @@ class Game(object):
         else:
             self.whos_next = player1
 
-    def is_not_finished(self):
+    def is_finished(self):
         for x in range(3):
             for y in range(3):
                 if self.board.game_board[x][y] == "":
-                    return True
-        return False
+                    return False
+        return True
 
-    def is_not_winner(self):
-        return not self.check_horizontal() and not self.check_vertical() and not self.check_left_to_right_diagonal() and not self.check_right_to_left_diagonal()
+    def is_winner(self):
+        return self.check_horizontal() or self.check_vertical() or self.check_left_to_right_diagonal() or self.check_right_to_left_diagonal()
 
     def check_horizontal(self):
         for row in range(3):
@@ -68,19 +68,19 @@ class Game(object):
         return False
 
     def play(self):
-        while self.is_not_finished() and self.is_not_winner():
+        while not self.is_finished() and not self.is_winner():
             try:
                 x = int(raw_input(self.whos_next.name + ", enter your x coordinate:"))
                 y = int(raw_input(self.whos_next.name + ", enter your y coordinate:"))
                 self.move(x, y)
             except ValueError:
                 print "You must enter valid numbers"
-        if not self.is_not_winner():
+        if self.is_winner():
             if self.whos_next == player1:
                 print player2.name + " won!"
             else:
                 print player1.name + " won!"
-        elif not self.is_not_finished():
+        elif self.is_finished():
             print "Awk...looks like no one won..."
 
 
