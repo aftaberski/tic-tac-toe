@@ -20,12 +20,12 @@ class Game(object):
         self.whos_next = player1
 
     def move(self, x, y):
-        if int(x) < 0 or int(x) >2 or int(y) < 0 or int(y) > 2:
+        if x < 0 or x >2 or y < 0 or y > 2:
             print "You need to pick numbers that are between 0 and 2"
-        elif self.board.game_board[int(x)][int(y)] == self.player1.mark or self.board.game_board[int(x)][int(y)] == self.player2.mark:
+        elif self.board.game_board[x][y] == self.player1.mark or self.board.game_board[x][y] == self.player2.mark:
             print "Someone already went there! Pick another spot"
         else:
-            self.board.game_board[int(x)][int(y)] = self.whos_next.mark
+            self.board.game_board[x][y] = self.whos_next.mark
             self.switch_players()
             self.board.print_board()
 
@@ -69,9 +69,12 @@ class Game(object):
 
     def play(self):
         while self.is_not_finished() and self.is_not_winner():
-            x = raw_input(self.whos_next.name + ", enter your x coordinate:")
-            y = raw_input(self.whos_next.name + ", enter your y coordinate:")
-            self.move(x, y)
+            try:
+                x = int(raw_input(self.whos_next.name + ", enter your x coordinate:"))
+                y = int(raw_input(self.whos_next.name + ", enter your y coordinate:"))
+                self.move(x, y)
+            except ValueError:
+                print "You must enter valid numbers"
         if not self.is_not_winner():
             if self.whos_next == player1:
                 print player2.name + " won!"
