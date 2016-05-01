@@ -48,29 +48,24 @@ class Game(object):
     def check_horizontal(self):
         for row in range(3):
             if len(set(self.board.game_board[row])) == 1 and self.board.game_board[row][0] is not "":
-                print "check horizontal passed"
                 return True
         return False
 
     def check_vertical(self):
         for column in range(3):
             if len(set([row[column] for row in self.board.game_board])) == 1 and self.board.game_board[0][column] is not "":
-                print "check vertical passed"
                 return True
         return False
 
     def check_left_to_right_diagonal(self):
         if len(set([self.board.game_board[num][num] for num in range(3)])) == 1 and self.board.game_board[0][0] is not "":
-            print "l to r passed"
             return True
         return False
 
     def check_right_to_left_diagonal(self):
         if len(set([list(reversed(self.board.game_board[num]))[num] for num in range(3)])) == 1 and list(reversed(self.board.game_board[0]))[0] is not "":
-            print "r to l passed"
             return True
         return False
-    # TODO: Add check right to left diagonal
 
     def play(self):
         while self.is_not_finished() and self.is_not_winner():
