@@ -27,7 +27,7 @@ class TestGame(TestCase):
                                     ["", "X", "X"]]
         self.assertEqual(False, self.game.is_not_winner())
 
-    def test_split(self):
+    def test_is_finished(self):
         self.game.board.game_board = [["X", "O", ""],
                                       ["O", "X", ""],
                                       ["", "O", ""]]
